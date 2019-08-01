@@ -7,25 +7,28 @@
     <title>Formulario</title>
 </head>
 <body>
-    <form method="POST" action="{{url('/')}}">
-
+    <form method="POST" action="{{url((isset($usuario) ? $usuario->id : '')) }}">
+        @if(isset($usuario))
+            @method('PUT')
+        @endif
+        
         @csrf
 
         <label for="nome">Nome</label>
-        <input type="text" name="nome" id="nome">
+        <input value="{{isset($usuario) ? $usuario->nome : ''}}" type="text" name="nome" id="nome">
         
         <label for="email">E-mail</label>
-        <input type="text" name="email"><br>
+        <input value="{{isset($usuario) ? $usuario->email : ''}}" type="text" name="email"><br>
 
         <label for="data_nascimento">Data de Nascimento</label>
-        <input type="text" name="data_nascimento"><br>
+        <input value="{{isset($usuario) ? $usuario->data_nascimento : ''}}" type="text" name="data_nascimento"><br>
 
 
         <input type="submit" value="Enviar">
 
         <select name="nivel_id">
             @foreach ($niveis as $nivel)
-                <option value="{{$nivel->id}}">{{$nivel->nome}}</option>
+                <option {{isset($usuario) && $usuario->nivel_id == $nivel->id ? 'selected' : ''}} value="{{$nivel->id}}">{{$nivel->nome}}</option>
             @endforeach
         </select>
 

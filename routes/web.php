@@ -15,6 +15,8 @@ Route::get('/', 'UsuarioController@index');
 
 Route::get('/form', 'UsuarioController@create');
 Route::post('/', 'UsuarioController@store');
+Route::get('/{id}/edit', 'UsuarioController@edit');
+Route::put('/{id}', 'UsuarioController@update');
 
 //GET
 
